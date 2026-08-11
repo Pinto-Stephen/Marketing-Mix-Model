@@ -1,0 +1,21 @@
+{
+  "in_sample_train": {
+    "n_weeks": 100,
+    "mape_pct": 14.336199711871856,
+    "r2": 0.6772035271284542
+  },
+  "out_of_sample_test": {
+    "n_weeks": 17,
+    "mape_pct": 29.626762079324674,
+    "r2": 0.3314601998139176
+  },
+  "convergence": {
+    "max_r_hat": 1.0026689493633825,
+    "min_ess_bulk": 2125.1412592395195,
+    "n_divergences": 8,
+    "n_post_tuning_draws": 4000,
+    "all_targets_met": true
+  },
+  "holiday_week_mape_pct": 18.833133461306932,
+  "non_holiday_week_mape_pct": 15.90784018177719
+}

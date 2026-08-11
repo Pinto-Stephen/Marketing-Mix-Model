@@ -1,0 +1,59 @@
+C:\Users\steph\PycharmProjects\MMM-lite\.venv\Lib\site-packages\pymc_extras\prior.py:822: UserWarning: Implicit conversion of array-like parameter sigma to DataArray with dims ('channel',). Use DataArray with explicit dims to avoid this warning
+  return _param_value_with_dims(param, value, dims=self.dims)
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [adstock_alpha, saturation_lam, saturation_beta, gamma_control, y_sigma, intercept_contribution]
+C:\Users\steph\PycharmProjects\MMM-lite\.venv\Lib\site-packages\pymc\step_methods\hmc\quadpotential.py:321: RuntimeWarning: overflow encountered in dot
+  return 0.5 * np.dot(x, v_out)
+C:\Users\steph\PycharmProjects\MMM-lite\.venv\Lib\site-packages\pymc\step_methods\hmc\quadpotential.py:321: RuntimeWarning: overflow encountered in dot
+  return 0.5 * np.dot(x, v_out)
+Train: 100 weeks (2021-10-15 to 2023-09-08)
+Test (held out, not used to fit): 17 weeks (2023-09-15 to 2024-01-05)
+
+Deriving business-plausible saturation_beta priors from ROAS benchmarks:
+  spend_google_search: ROAS prior mean=4.0x, max_spend=31,291, -> saturation_beta prior mean (scaled)=0.305
+  spend_google_shopping_pmax: ROAS prior mean=3.0x, max_spend=35,293, -> saturation_beta prior mean (scaled)=0.258
+  spend_meta: ROAS prior mean=2.5x, max_spend=80,169, -> saturation_beta prior mean (scaled)=0.488
+  spend_tiktok: ROAS prior mean=2.0x, max_spend=14,357, -> saturation_beta prior mean (scaled)=0.070
+
+Sampling (4 chains, 1000 tune + 1000 draws, target_accept=0.9)...
++-----------------------------------------------------------------------------+
+|              |       |       | Step  | Grad  |              |       |       |
+| Progress     | Draw  | Dive… | size  | evals | Speed        | Elap… | Rema… |
+|--------------+-------+-------+-------+-------+--------------+-------+-------|
+| ------------ | 2000  | 1     | 0.071 | 63    | 232.20 draw… | 0:00… | 0:00… |
+| ------------ | 2000  | 1     | 0.088 | 63    | 232.20 draw… | 0:00… | 0:00… |
+| ------------ | 2000  | 6     | 0.065 | 63    | 258.47 draw… | 0:00… | 0:00… |
+| ------------ | 2000  | 0     | 0.067 | 63    | 215.73 draw… | 0:00… | 0:00… |
++-----------------------------------------------------------------------------+
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 22 seconds.
+There were 8 divergences after tuning. Increase `target_accept` or reparameterize.
+Computing ... ---------------------------------------- 100% 0:00:00
+
+Saved fitted trace to C:\Users\steph\PycharmProjects\MMM-lite\data\fitted_mmm.nc
+
+Convergence summary (also written to C:\Users\steph\PycharmProjects\MMM-lite\data\convergence_summary.csv):
+                                                mean       sd eti89_lb eti89_ub ess_bulk ess_tail r_hat mcse_mean  mcse_sd
+intercept_contribution                         0.096   0.0389    0.034     0.16     3388     2573  1.00   0.00067  0.00048
+adstock_alpha[spend_google_search]             0.116    0.105   0.0056     0.32     3914     1948  1.00    0.0014   0.0017
+adstock_alpha[spend_google_shopping_pmax]      0.228    0.181    0.015     0.58     4943     2203  1.00    0.0024   0.0019
+adstock_alpha[spend_meta]                      0.335    0.244    0.026     0.78     3552     2471  1.00     0.004   0.0022
+adstock_alpha[spend_tiktok]                    0.304    0.215    0.026     0.69     4087     2204  1.00     0.003   0.0018
+saturation_lam[spend_google_search]              1.6     0.79     0.72        3     3350     2731  1.00     0.015    0.024
+saturation_lam[spend_google_shopping_pmax]      3.22     2.21     0.59      7.5     3380     2416  1.00     0.036    0.031
+saturation_lam[spend_meta]                      1.95     1.13     0.59        4     3483     2656  1.00     0.018     0.02
+saturation_lam[spend_tiktok]                    3.66      2.3     0.84      7.9     3364     2285  1.00     0.037    0.037
+saturation_beta[spend_google_search]            0.41     0.17     0.19     0.71     2755     2166  1.00    0.0031   0.0032
+saturation_beta[spend_google_shopping_pmax]    0.047    0.049   0.0026     0.13     2299     2046  1.00     0.001   0.0022
+saturation_beta[spend_meta]                    0.265    0.176    0.065     0.59     2125     1955  1.00    0.0037   0.0048
+saturation_beta[spend_tiktok]                  0.054    0.038    0.006     0.12     2232     2090  1.00   0.00075  0.00062
+gamma_control[trend]                         0.00181  0.00037   0.0012   0.0024     2784     2337  1.00     7e-06  5.2e-06
+gamma_control[yearly_sin_1]                    0.034   0.0148    0.011    0.058     3237     2873  1.00   0.00026  0.00019
+gamma_control[yearly_cos_1]                   0.0237   0.0138   0.0018    0.045     2965     2568  1.00   0.00025  0.00018
+gamma_control[yearly_sin_2]                   0.0212   0.0132  0.00011    0.042     3403     2931  1.00   0.00023  0.00016
+gamma_control[yearly_cos_2]                   0.0311   0.0122    0.011     0.05     5400     3170  1.00   0.00017  0.00012
+gamma_control[us_federal_holiday_week]        0.0007   0.0215   -0.034    0.034     4909     3185  1.00   0.00031  0.00021
+gamma_control[bfcm_week]                       0.237    0.061     0.14     0.33     5582     3057  1.00   0.00081  0.00061
+y_sigma                                       0.0775    0.006    0.069    0.088     4225     2632  1.00   9.3e-05  6.9e-05
+
+max r_hat = 1.0027 (target < 1.01), min ESS bulk = 2125 (target > 400)

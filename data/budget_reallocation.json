@@ -1,0 +1,49 @@
+{
+  "optimization_window": {
+    "start": "2024-01-12",
+    "end": "2024-02-02",
+    "n_periods": 4
+  },
+  "total_budget_held_fixed": 494208.83,
+  "bounds_used": "[0.3x, 2.5x] of current weekly spend per channel",
+  "status_quo_expected_response": 1240378.361724834,
+  "bounded_optimal_expected_response": 1425052.1554019128,
+  "bounded_uplift_pct": 14.888504941369396,
+  "unconstrained_optimal_expected_response": 1431357.3910129156,
+  "unconstrained_uplift_pct": 15.396836576745155,
+  "channels": [
+    {
+      "channel": "spend_google_search",
+      "channel_label": "Google Search",
+      "current_weekly_spend": 12536.250000000002,
+      "bounded_optimal_weekly_spend": 31340.625000000004,
+      "pct_change": 150.0,
+      "unconstrained_optimal_weekly_spend": 37792.78906532066
+    },
+    {
+      "channel": "spend_google_shopping_pmax",
+      "channel_label": "Google Shopping/PMax",
+      "current_weekly_spend": 28593.05,
+      "bounded_optimal_weekly_spend": 9794.559049755742,
+      "pct_change": -65.74496582296837,
+      "unconstrained_optimal_weekly_spend": 8689.232042757034
+    },
+    {
+      "channel": "spend_meta",
+      "channel_label": "Meta",
+      "current_weekly_spend": 79287.1275,
+      "bounded_optimal_weekly_spend": 74577.57345024426,
+      "pct_change": -5.9398722065643454,
+      "unconstrained_optimal_weekly_spend": 67254.09487048068
+    },
+    {
+      "channel": "spend_tiktok",
+      "channel_label": "TikTok",
+      "current_weekly_spend": 3135.7799999999997,
+      "bounded_optimal_weekly_spend": 7839.449999999999,
+      "pct_change": 150.0,
+      "unconstrained_optimal_weekly_spend": 9816.091521441618
+    }
+  ],
+  "caveat": "This allocation is directional only. It is derived from adstock/saturation curves fit on observational spend with no incrementality-test calibration; evaluate.py's ROAS estimates already show wide credible intervals and two channels (google_shopping_pmax, meta) with posterior-mean ROAS below break-even. Treat this as a hypothesis to test (e.g. via a small geo-holdout or budget-shift experiment), not an instruction."
+}
