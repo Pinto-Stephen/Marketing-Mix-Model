@@ -32,7 +32,7 @@ OUT_PATH = OUT_DIR / "mmm_weekly_data.csv"
 
 TARGET_TIMESERIES_ID = "513211a5ba7d7c20145586b16abfda54"
 
-FOURIER_ORDER = 2  # yearly-seasonality Fourier modes, matches prior project
+FOURIER_ORDER = 2
 WEEK_LENGTH_DAYS = 7
 
 
@@ -43,9 +43,7 @@ def load_and_filter_brand(tsid: str) -> pd.DataFrame:
     if brand.empty:
         raise ValueError(f"No rows found for MMM_TIMESERIES_ID={tsid}")
 
-    # Sanity check: this timeseries is documented (Step 1 investigation) to have
-    # zero internal date gaps. Assert it here so a future re-export can't silently
-    # break the "no missing weeks" assumption the rest of this script relies on.
+
     day_diffs = brand["DATE_DAY"].diff().dropna().unique()
     if not (len(day_diffs) == 1 and day_diffs[0] == pd.Timedelta(days=1)):
         raise AssertionError(
@@ -183,7 +181,7 @@ def add_controls(weekly: pd.DataFrame) -> pd.DataFrame:
 
     us_holidays = holidays.US(years=range(weekly["week_start"].dt.year.min(),
                                            weekly["week_end"].dt.year.max() + 1))
-    # Black Friday = day after 4th Thursday of November; Cyber Monday = the following Monday.
+
     bfcm_dates = set()
     for yr in range(weekly["week_start"].dt.year.min(), weekly["week_end"].dt.year.max() + 1):
         thanksgiving = [d for d in us_holidays if d.year == yr and "Thanksgiving" in us_holidays[d]]

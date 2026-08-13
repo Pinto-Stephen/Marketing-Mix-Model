@@ -56,11 +56,11 @@ CHANNEL_COLORS = {
     "spend_tiktok": "#eda100",
 }
 
-RECENT_WEEKS_FOR_BASELINE = 4  # "current" allocation = avg weekly spend over the most recent N actual weeks
-OPTIMIZATION_START = "2024-01-12"  # the week immediately after the dataset's last observed week
-OPTIMIZATION_END = "2024-02-02"    # 4-week window
-BOUND_LOWER_MULT = 0.3   # per-channel floor: 30% of current weekly spend
-BOUND_UPPER_MULT = 2.5   # per-channel ceiling: 250% of current weekly spend
+RECENT_WEEKS_FOR_BASELINE = 4
+OPTIMIZATION_START = "2024-01-12"
+OPTIMIZATION_END = "2024-02-02"
+BOUND_LOWER_MULT = 0.3
+BOUND_UPPER_MULT = 2.5
 
 
 def main():
@@ -95,9 +95,6 @@ def main():
     bounded_response = float(-bounded_res.fun)
 
     # ---- Unconstrained (0, total_budget) optimization, for comparison only ----
-    # This is expected to hit a corner solution given the weak channel-level
-    # identifiability found in evaluate.py -- reported to make that concentration
-    # risk visible, not as a recommendation.
     unconstrained_bounds = {ch: (0.0, total_budget) for ch in CHANNEL_COLUMNS}
     unc_alloc, unc_res = wrapper.optimize_budget(budget=total_budget, budget_bounds=unconstrained_bounds)
     unconstrained_response = float(-unc_res.fun)

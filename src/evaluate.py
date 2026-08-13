@@ -43,8 +43,6 @@ CONTROL_COLUMNS = [
     "bfcm_week",
 ]
 
-# Same benchmark priors as fit_model.py, kept here only for the ROAS chart's
-# "prior benchmark" reference marker -- not used in any computation.
 CHANNEL_ROAS_PRIOR_MEAN = {
     "spend_google_search": 4.0,
     "spend_google_shopping_pmax": 3.0,
@@ -52,20 +50,13 @@ CHANNEL_ROAS_PRIOR_MEAN = {
     "spend_tiktok": 2.0,
 }
 
-# Plausible real-world digital-marketing ROAS bounds used only as a sanity
-# check on the posterior, not as a constraint on the model itself. Outside
-# this band an estimate is flagged as a likely identifiability artifact
-# rather than reported as a credible business number.
 PLAUSIBLE_ROAS_RANGE = (0.3, 10.0)
 
-# dataviz skill categorical palette, slots 1-4 (light mode; these are static
-# PNG exports, not theme-aware artifacts), assigned once and reused across
-# every figure so each channel keeps the same color throughout the report.
 CHANNEL_COLORS = {
-    "spend_google_search": "#2a78d6",         # slot 1 blue
-    "spend_google_shopping_pmax": "#eb6834",  # slot 2 orange
-    "spend_meta": "#1baf7a",                  # slot 3 aqua
-    "spend_tiktok": "#eda100",                # slot 4 yellow
+    "spend_google_search": "#2a78d6",
+    "spend_google_shopping_pmax": "#eb6834",
+    "spend_meta": "#1baf7a",
+    "spend_tiktok": "#eda100",
 }
 CHANNEL_LABELS = {
     "spend_google_search": "Google Search",
@@ -120,9 +111,6 @@ def main():
     print(f"In-sample (train, n={len(train_df)}): MAPE={train_mape:.2f}%, R2={train_r2:.3f}")
 
     # ---- Out-of-sample (test) posterior predictive ----
-    # include_last_observations=True prepends the training tail internally so
-    # GeometricAdstock(l_max=8) has real carryover history at the start of the
-    # test window, instead of ramping up from zero.
     X_test = test_df[[DATE_COLUMN] + CHANNEL_COLUMNS + CONTROL_COLUMNS]
     pp_test = mmm.sample_posterior_predictive(
         X_test, extend_idata=False, combined=False, include_last_observations=True
